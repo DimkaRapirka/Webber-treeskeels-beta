@@ -5,7 +5,7 @@ Work in progress: some features have not been tested in game.
 Feedback and bug reports: https://github.com/DimkaRapirka/Webber-treeskeels-beta/issues
 ]]
 author = "Spider Kingdom"
-version = "0.1.0"
+version = "0.1.1"
 
 api_version = 10
 
@@ -27,7 +27,7 @@ configuration_options =
         hover = "Text language for the skill tree and new items.",
         options =
         {
-            { description = "Auto", data = "auto", hover = "Russian if a Russian translation is active, otherwise English." },
+            { description = "Auto", data = "auto", hover = "Russian when Russification Pack for DST is enabled or the game language is Russian; otherwise English." },
             { description = "English", data = "en" },
             { description = "Русский", data = "ru" },
         },

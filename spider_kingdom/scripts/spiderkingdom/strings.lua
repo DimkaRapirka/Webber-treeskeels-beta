@@ -9,8 +9,26 @@ local function ShouldUseRussian()
     elseif option == "en" then
         return false
     end
-    local translator = GLOBAL.LanguageTranslator
-    return translator ~= nil and translator.defaultlang == "ru"
+    local translator = GLOBAL.rawget(GLOBAL, "LanguageTranslator")
+    if translator ~= nil and translator.defaultlang == "ru" then
+        return true
+    end
+
+    -- Russification Pack for DST exposes this marker, including in local/GitHub installs.
+    -- Optional globals must use rawget: strict.lua rejects reads of undeclared names.
+    local mods = GLOBAL.rawget(GLOBAL, "mods")
+    if type(mods) == "table" and GLOBAL.rawget(mods, "RussianLanguagePack") ~= nil then
+        return true
+    end
+
+    -- Enablement is available even before the pack's modmain creates its marker.
+    -- IsModEnabledAny also honours temporary and forced enable/disable flags (modindex.lua).
+    local index = GLOBAL.rawget(GLOBAL, "KnownModIndex")
+    if index ~= nil and (index:IsModEnabledAny("workshop-1240565842")
+        or index:IsModEnabledAny("workshop-2286791724")) then
+        return true
+    end
+    return false
 end
 
 local LANG =
