@@ -48,6 +48,7 @@ for _, prefab in ipairs({
     "sk_spidereggsack_2", "sk_spidereggsack_3",
     "sk_royal_eggsack_warrior", "sk_royal_eggsack_hider", "sk_royal_eggsack_spitter",
     "sk_royal_eggsack_dropper", "sk_royal_eggsack_healer", "sk_royal_eggsack_moon",
+    "sk_command_whistle",
     "sk_silkglob", "sk_portable_cocoon_item", "sk_courier_kit", "sk_royal_invitation", "sk_brood_jelly",
     "sk_spiderclaws", "sk_lunar_fang", "sk_shadow_fang", "sk_lunar_carapace", "sk_shadow_carapace",
     "sk_royal_throne", "sk_colony_heart", -- crafting menu pictures of the structures

@@ -138,6 +138,9 @@ function Stances.SetStance(spider, stance, immediate_anchor)
             ResetFlags(spider)
         end
     end
+    if stance == "stay" and immediate_anchor then
+        spider._sk_stay_anchor = spider:GetPosition()
+    end
     Stances.ApplyFlags(spider)
 end
 

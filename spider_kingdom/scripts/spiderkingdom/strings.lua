@@ -53,8 +53,13 @@ local LANG =
             SK_QUEENRITUAL = "Offer to the queen",
             SK_SETBROOD = "Choose the brood",
             SK_SQUAD = { GENERIC = "Lend bodyguards", LEND = "Lend bodyguards", RECALL = "Recall bodyguards" },
-            SK_SPIDERSTANCE = "Change orders", SK_SENDHOME = "Send spiders home",
+            SK_COMMAND = "Give spider orders", SK_SPIDERSTANCE = "Change orders", SK_SENDHOME = "Send spiders home",
             SK_HEARTTOGGLE = { GENERIC = "Toggle workers", PAUSE = "Let workers rest", RESUME = "Wake workers" },
+        },
+        COMMAND_WHEEL = {
+            FOLLOW = "Follow", ATTACK = "Attack", DEFEND = "Defend", PASSIVE = "No fighting",
+            STAY = "Stay here", HOME = "Return home", HOME_SPEECH = "Time to go home, friends!",
+            OPEN = "Spider commands", CLOSE = "Close commands",
         },
         STANCES =
         {
@@ -69,6 +74,7 @@ local LANG =
             SK_SETDENROLE = { NOTOWNER = "That's someone else's den.", SAMEROLE = "It already does that job." },
             SK_SETBROOD = { NOTLIVING = "Only a living den can raise a brood.", NOTOWNER = "That's someone else's den.", NOWORKSHOP = "Our queen needs to be closer to see it." },
             SK_SENDHOME = { NOSPIDERS = "None of our friends are close enough.", FULL = "There's no room left in there." },
+            SK_COMMAND = { WEBBERONLY = "Only our spider friends understand this.", NOSPIDERS = "None of our friends are close enough.", NOHOME = "Our friends need a suitable den with room nearby." },
             SK_SQUAD = { NOSPIDERS = "None of our friends are close enough.", LIMIT = "We've already lent out enough friends." },
             SK_HEARTTOGGLE = { NOTOWNER = "That's someone else's heart.", DORMANT = "It isn't beating right now." },
             SK_ROYALINVITE = { NOTHRONE = "We need to build her a throne first.", TOOFAR = "Our throne is too far away for her.", HASQUEEN = "We already have a queen!", BUSY = "She's too busy to listen right now." },
@@ -162,6 +168,7 @@ local LANG =
         {
             SK_SPIDEREGGSACK_2 = "Hardy Spider Eggs",
             SK_SPIDEREGGSACK_3 = "Mighty Spider Eggs",
+            SK_COMMAND_WHISTLE = "Spider Command Whistle",
             SK_SPIDERCLAWS = "Spider Claws",
             SK_SILKGLOB = "Silk Glob",
             SK_PORTABLE_COCOON = "Portable Cocoon",
@@ -181,6 +188,7 @@ local LANG =
 
         RECIPE_DESC =
         {
+            SK_COMMAND_WHISTLE = "Choose orders for all your spiders.",
             SK_SPIDEREGGSACK_2 = "Hatches into a tier 2 den.",
             SK_SPIDEREGGSACK_3 = "Hatches into a tier 3 den.",
             SK_SPIDERCLAWS = "Pounce like a spider.",
@@ -199,6 +207,7 @@ local LANG =
 
         DESCRIBE =
         {
+            SK_COMMAND_WHISTLE = "Six little tunes for all our friends!",
             SK_SPIDEREGGSACK_2 = "They're already big and strong!",
             SK_SPIDEREGGSACK_3 = "A whole palace is waiting in there.",
             SK_SPIDERCLAWS = "Now we can pounce!",
@@ -240,7 +249,12 @@ local LANG =
             SK_SETBROOD = "Выбрать выводок",
             SK_SQUAD = { GENERIC = "Одолжить телохранителей", LEND = "Одолжить телохранителей", RECALL = "Отозвать телохранителей" },
             SK_HEARTTOGGLE = { GENERIC = "Переключить рабочих", PAUSE = "Отпустить рабочих отдыхать", RESUME = "Разбудить рабочих" },
-            SK_SPIDERSTANCE = "Сменить приказ", SK_SENDHOME = "Отправить пауков домой",
+            SK_COMMAND = "Отдать приказ паукам", SK_SPIDERSTANCE = "Сменить приказ", SK_SENDHOME = "Отправить пауков домой",
+        },
+        COMMAND_WHEEL = {
+            FOLLOW = "Следовать", ATTACK = "Атаковать", DEFEND = "Защищать", PASSIVE = "Не вступать в бой",
+            STAY = "Стоять на месте", HOME = "Домой", HOME_SPEECH = "Пора домой, друзья!",
+            OPEN = "Команды паукам", CLOSE = "Закрыть команды",
         },
         STANCES =
         {
@@ -255,6 +269,7 @@ local LANG =
             SK_SETDENROLE = { NOTOWNER = "Это чужой кокон.", SAMEROLE = "Он уже этим занят." },
             SK_SETBROOD = { NOTLIVING = "Выводок растёт только в жилом коконе.", NOTOWNER = "Это чужой кокон.", NOWORKSHOP = "Наша королева должна быть поближе." },
             SK_SENDHOME = { NOSPIDERS = "Наших друзей нет рядом.", FULL = "Там больше нет места." },
+            SK_COMMAND = { WEBBERONLY = "Этот свисток понимают только наши друзья.", NOSPIDERS = "Наших друзей нет рядом.", NOHOME = "Друзьям нужен подходящий кокон со свободным местом." },
             SK_SQUAD = { NOSPIDERS = "Наших друзей нет рядом.", LIMIT = "Мы и так одолжили достаточно друзей." },
             SK_HEARTTOGGLE = { NOTOWNER = "Это чужое сердце.", DORMANT = "Сейчас оно не бьётся." },
             SK_ROYALINVITE = { NOTHRONE = "Сначала нужно построить ей трон.", TOOFAR = "Наш трон слишком далеко от неё.", HASQUEEN = "У нас уже есть королева!", BUSY = "Ей сейчас не до нас." },
@@ -342,6 +357,7 @@ local LANG =
         {
             SK_SPIDEREGGSACK_2 = "Крепкие паучьи яйца",
             SK_SPIDEREGGSACK_3 = "Могучие паучьи яйца",
+            SK_COMMAND_WHISTLE = "Командный паучий свисток",
             SK_SPIDERCLAWS = "Паучьи когти",
             SK_SILKGLOB = "Шёлковый комок",
             SK_PORTABLE_COCOON = "Переносной кокон",
@@ -361,6 +377,7 @@ local LANG =
 
         RECIPE_DESC =
         {
+            SK_COMMAND_WHISTLE = "Выбирайте приказы паукам через колесо.",
             SK_SPIDEREGGSACK_2 = "Вырастает в кокон 2-го уровня.",
             SK_SPIDEREGGSACK_3 = "Вырастает в кокон 3-го уровня.",
             SK_SPIDERCLAWS = "Прыгай, как паук.",
@@ -379,6 +396,7 @@ local LANG =
 
         DESCRIBE =
         {
+            SK_COMMAND_WHISTLE = "Шесть мелодий для наших друзей!",
             SK_SPIDEREGGSACK_2 = "Они уже большие и сильные!",
             SK_SPIDEREGGSACK_3 = "Внутри ждёт целый дворец.",
             SK_SPIDERCLAWS = "Теперь мы умеем прыгать!",
@@ -421,6 +439,9 @@ for k, v in pairs(lang.ACTIONFAIL) do
 end
 STRINGS.SK_DENROLE_NAMES = lang.DENROLE_NAMES
 STRINGS.SK_STANCES = lang.STANCES
+STRINGS.SK_COMMAND_WHEEL = lang.COMMAND_WHEEL
+STRINGS.ACTIONS.USESPELLBOOK.SK_SPIDERS = lang.COMMAND_WHEEL.OPEN
+STRINGS.ACTIONS.CLOSESPELLBOOK.SK_SPIDERS = lang.COMMAND_WHEEL.CLOSE
 STRINGS.SK_ROYAL = lang.ROYAL
 STRINGS.SK_SQUAD = lang.SQUAD
 STRINGS.SK_COLONYHEART = lang.COLONYHEART

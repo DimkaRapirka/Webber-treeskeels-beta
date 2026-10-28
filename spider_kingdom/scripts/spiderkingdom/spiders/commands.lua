@@ -1,4 +1,4 @@
--- Basic spider commands (no Insight cost) with the stock Spider Whistle, until a command UI exists:
+-- Basic spider commands (no Insight cost) with the stock Spider Whistle (legacy controls; separate sk_command_whistle has the wheel):
 --   * use the whistle from the inventory: stock HERD_FOLLOWERS (summon + 10 s passive buff), unchanged;
 --   * use the whistle on one of your spiders: SK_SPIDERSTANCE cycles the orders of all your spiders,
 --     follow -> attack -> defend -> passive -> stay (inventory tiles cannot tell left from right
@@ -9,6 +9,7 @@
 
 local _G = GLOBAL
 local Stances = require("spiderkingdom/spiders/stances")
+local Home = require("spiderkingdom/spiders/home")
 
 _G.require("behaviours/leash")
 _G.require("behaviours/standstill")
@@ -153,102 +154,11 @@ SK_SPIDERSTANCE.fn = function(act)
 end
 AddAction(SK_SPIDERSTANCE)
 
-local function IsDenUsable(den)
-    return den ~= nil and den:IsValid() and den.components.childspawner ~= nil
-        and not den:HasTag("burnt")
-        and not (den.components.health ~= nil and den.components.health:IsDead())
-end
-
-local function GetHomeSpawner(spider)
-    local home = spider.components.homeseeker ~= nil and spider.components.homeseeker.home or nil
-    return home, IsDenUsable(home) and home.components.childspawner or nil
-end
-
-local function IsOwnedBy(childspawner, spider)
-    return childspawner.childrenoutside[spider] ~= nil or childspawner.emergencychildrenoutside[spider] ~= nil
-end
-
--- Pool a new (homeless) spider would join in this den, if there is room: "regular" first (also when
--- warriors are disabled and both names are "spider"), then "emergency". Other mutations would lose
--- their type in the den (childspawner otherchildreninside double-counts), so they are not admitted.
-local function GetAdmitPool(childspawner, spider)
-    if spider.prefab == childspawner.childname
-        and childspawner.childreninside + childspawner.numchildrenoutside < childspawner.maxchildren then
-        return "regular"
-    end
-    if spider.prefab == childspawner.emergencychildname
-        and childspawner:NumEmergencyChildren() < childspawner.maxemergencychildren then
-        return "emergency"
-    end
-    return nil
-end
-
--- pool: nil when the spider is already owned by this den.
-local function SendIntoDen(spider, childspawner, pool)
-    spider.components.follower:StopFollowing()
-    if pool == "emergency" then
-        childspawner:TakeEmergencyOwnership(spider)
-    elseif pool == "regular" then
-        childspawner:TakeOwnership(spider)
-    end
-    local fx = _G.SpawnPrefab("spawn_fx_small")
-    if fx ~= nil then
-        fx.Transform:SetPosition(spider.Transform:GetWorldPosition())
-    end
-    childspawner:GoHome(spider) -- the den's ongohome drops a worn hat (prefabs/spiderden.lua OnGoHome)
-end
-
 local SK_SENDHOME = _G.Action({ priority = 1 })
 SK_SENDHOME.id = "SK_SENDHOME"
 SK_SENDHOME.str = _G.STRINGS.ACTIONS.SK_SENDHOME
 SK_SENDHOME.fn = function(act)
-    local doer, den = act.doer, act.target
-    if doer == nil or den == nil or not doer:HasTag("spiderwhisperer") or doer.components.leader == nil
-        or den.components.childspawner == nil or den:HasTag("burnt")
-        or (den.components.health ~= nil and den.components.health:IsDead()) then
-        return false
-    end
-
-    local childspawner = den.components.childspawner
-    local radius_sq = TUNING.SPIDERKINGDOM.COMMAND_HOME_RADIUS * TUNING.SPIDERKINGDOM.COMMAND_HOME_RADIUS
-    local spiders = {}
-    for follower in pairs(doer.components.leader.followers) do
-        if follower:IsValid() and follower:HasTag("spider") and not follower:HasTag("spiderqueen")
-            and not follower:HasTag("sk_worker") and not Stances.IsCouriering(follower)
-            and not follower:HasTag("sk_guardian") -- a borrowed T4 bodyguard is not yours to send home
-            and not follower:HasTag("sk_mount") -- M1 Spider Steed does not live in a den
-            and not (follower.components.health ~= nil and follower.components.health:IsDead())
-            and follower:GetDistanceSqToInst(doer) <= radius_sq then
-            table.insert(spiders, follower)
-        end
-    end
-    if #spiders == 0 then
-        return false, "NOSPIDERS"
-    end
-
-    local sent = 0
-    for _, spider in ipairs(spiders) do
-        local home, homespawner = GetHomeSpawner(spider)
-        if home ~= nil then
-            -- Back to its own den: it is already counted there, no capacity check.
-            -- A dead or burnt home would just consume the spider: it stays with Webber then.
-            if homespawner ~= nil and IsOwnedBy(homespawner, spider) then
-                SendIntoDen(spider, homespawner, nil)
-                sent = sent + 1
-            end
-        else
-            local pool = GetAdmitPool(childspawner, spider)
-            if pool ~= nil then
-                SendIntoDen(spider, childspawner, pool)
-                sent = sent + 1
-            end
-        end
-    end
-
-    if sent == 0 then
-        return false, "FULL"
-    end
-    return true
+    return Home.Send(act.doer, act.target)
 end
 AddAction(SK_SENDHOME)
 

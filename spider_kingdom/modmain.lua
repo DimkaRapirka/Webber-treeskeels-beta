@@ -13,6 +13,7 @@ PrefabFiles =
     "sk_royal_workshop",
     "sk_spider_mount",
     "sk_affinity_gear",
+    "sk_command_whistle",
 }
 
 Assets = {}
@@ -46,6 +47,7 @@ modimport("scripts/spiderkingdom/couriers/shard.lua")
 
 -- Basic spider commands (after T1 and courier: their combat wrappers are chained)
 modimport("scripts/spiderkingdom/spiders/commands.lua")
+modimport("scripts/spiderkingdom/spiders/command_whistle.lua")
 
 -- T4 Shared Squad (after T1 / courier / commands: its combat wrappers are the outermost)
 modimport("scripts/spiderkingdom/spiders/squad.lua")

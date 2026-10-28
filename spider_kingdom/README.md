@@ -6,7 +6,7 @@
 
 ## Установка
 
-1. [Скачай мод](https://github.com/DimkaRapirka/Webber-treeskeels-beta/releases/download/v0.1.2-beta/spider_kingdom.zip) и распакуй архив.
+1. [Скачай мод](https://github.com/DimkaRapirka/Webber-treeskeels-beta/releases/download/v0.1.3-beta/spider_kingdom.zip) и распакуй архив.
 2. Помести папку `spider_kingdom` в папку игры `mods`. На macOS: `dontstarve_steam.app/Contents/mods`.
 3. Включи **Webber: Spider Kingdom** в серверных модах своего мира и выбери Веббера. Мод нужен хосту и всем игрокам.
 
@@ -16,11 +16,15 @@
 
 В режиме **Language → Auto** русский включается автоматически при активном [Russification Pack for DST](https://steamcommunity.com/sharedfiles/filedetails/?id=1240565842). Язык также можно выбрать вручную.
 
+## Командный свисток
+
+Веббер крафтит его из обычного свистка, 4 шёлка и 2 паучьих желёз. ПКМ по предмету в инвентаре открывает колесо: следовать, атаковать, защищать, не драться, стоять, домой.
+
 ## Планы
 
 - Проверить новые механики, мультиплеер и переходы в пещеры.
 - Исправить ошибки и доработать анимации.
-- Добавить эффекты, звуки, колесо команд и китайский перевод.
+- Добавить эффекты, звуки и китайский перевод.
 
 ## Обратная связь
 

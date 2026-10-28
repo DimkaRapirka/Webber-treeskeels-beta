@@ -5,7 +5,7 @@ Work in progress: some features have not been tested in game.
 Feedback and bug reports: https://github.com/DimkaRapirka/Webber-treeskeels-beta/issues
 ]]
 author = "Spider Kingdom"
-version = "0.1.2"
+version = "0.1.3"
 
 api_version = 10
 
